@@ -1,0 +1,12 @@
+# Dépendances directes ; le verrou complet testé est requirements.lock.txt.
+# PyTorch CPU s'installe séparément via scripts/bootstrap.sh.
+torch==2.8.0+cpu
+fastapi==0.115.12
+uvicorn==0.35.0
+httpx==0.28.1
+pydantic-settings==2.10.1
+chromadb==1.0.20
+sentence-transformers==5.1.1
+transformers==4.56.2
+numpy==2.2.6
+pytest==8.4.2

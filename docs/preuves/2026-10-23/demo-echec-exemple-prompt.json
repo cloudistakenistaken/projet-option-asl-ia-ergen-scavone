@@ -1,0 +1,29 @@
+{
+  "mode": "baseline",
+  "answer": "Information extraite. [S1]",
+  "sources": [
+    {
+      "citation": "S1",
+      "id": "906563d0a3833ae2ce0704934f10b983af53fbd9768b62610da17ed97c66b4f7",
+      "source": "public/conges.md",
+      "classification": "public",
+      "chunk": 0,
+      "text": "# Novalys — Politique de congés\n\nDocument public interne de démonstration. Entreprise et données entièrement fictives.\n\nChaque salarié dispose de 25 jours de congés par an.\nLa demande doit être déposée au moins 14 jours avant le départ.\nElle doit être validée par le responsable.",
+      "distance": 0.11180466413497925
+    },
+    {
+      "citation": "S2",
+      "id": "f33e86daccdc2c64f218749f9279661deaca3f65982d80079e4da714d36ea1ef",
+      "source": "public/teletravail.md",
+      "classification": "public",
+      "chunk": 0,
+      "text": "# Novalys — Télétravail\n\nDocument public interne de démonstration. Entreprise et données entièrement fictives.\n\nLe télétravail est autorisé jusqu'à 2 jours par semaine.\nIl nécessite la validation du responsable.\nL'utilisation du VPN est obligatoire pendant le télétravail.",
+      "distance": 0.18882280588150024
+    }
+  ],
+  "latency_ms": {
+    "retrieval": 54.1,
+    "generation": 599.23,
+    "total": 653.33
+  }
+}

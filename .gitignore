@@ -218,3 +218,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Index vectoriel et résultats locaux, reconstructibles depuis le corpus.
+.local/
