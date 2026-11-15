@@ -105,3 +105,10 @@ Nous devons confirmer le socle final et la licence du modèle avec le professeur
 Les preuves ne sont pas encore rattachées à un nouveau commit. Aucun commit,
 push ou tag de jalon n'a été créé pour ces changements. Nous avançons vers
 J1 et J2 sans les déclarer validés.
+
+## Mise à jour du 6 novembre 2026 — revue J1
+
+Le socle décrit ci-dessus a depuis été committé dans `bcd7eb6`. Le bilan du
+23 octobre reste un historique des essais de cette séance. Le contenu des
+six attendus J1 a été vérifié ; l'architecture PDF fait trois pages et les
+rôles communs sont détaillés. Voir [la checklist J1](jalons/j1.md).

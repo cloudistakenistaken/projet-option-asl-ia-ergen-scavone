@@ -190,8 +190,11 @@ contient aucun vrai secret ni document confidentiel réel.
 
 ## Nos documents et les points encore ouverts
 
-Nous préparons J1, prévu le 6 novembre 2026 à 18 h, et avons commencé le RAG
-pour J2, prévu le 20 novembre à 18 h. Aucun de ces jalons n'est déclaré terminé.
+Le contenu J1 a été vérifié le 15 novembre 2026 contre les six attendus fournis.
+L'[architecture PDF](docs/architecture/architecture.pdf) tient sur trois pages.
+Le commit de revue et le tag J1 restent à créer ; l'acceptation du professeur
+et le respect de l'échéance du 6 novembre ne sont pas attestés par cette revue.
+J2 reste en cours, avec l'oral le 20 novembre au matin et le rendu à 18 h.
 
 - [Architecture et schéma](docs/architecture/architecture.md).
 - [ADR 001 : exécution locale](docs/adr/001-execution-locale.md) et [ADR 002 : recherche](docs/adr/002-recherche-documentaire.md).

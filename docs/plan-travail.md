@@ -5,6 +5,8 @@ l'ensemble du projet : choix techniques, code, tests et documentation. Nous
 avons suivi cette organisation pendant la séance du 23 octobre. Le journal
 commun décrit notre travail et chacun garde aussi un carnet personnel.
 
+La répartition des responsabilités communes est détaillée dans [notre organisation](equipe.md).
+
 ## Nos échéances
 
 Toutes les heures sont celles de Paris.
@@ -18,12 +20,12 @@ Toutes les heures sont celles de Paris.
 | J4 — 22 janvier 2027, 18 h | Protections et comparaison avant/après selon un protocole fixé à l'avance. | Succès des attaques, latence et faux positifs ; au moins 3 répétitions, médiane, dispersion et tag. |
 | 29 janvier 2027 | Geler les fonctionnalités. | Version du gel et liste des corrections restantes. |
 | J5 — 5 février 2027, 18 h | Destruction et reconstruction par un membre qui ne l'a jamais faite. | Vidéo, durée, commandes, résultat et tag. |
-| Final — 12 février 2027, 18 h | Rapport, soutenance et démonstration avec `make demo`. | Livrables relus et démonstration rejouée. |
+| Final — 12 février 2027, 18 h | Rapport et démonstration avec `make demo` ; soutenance entre le 8 et le 19 février, avant les stages. | Livrables relus et démonstration rejouée. |
 
 ## Notre prochaine étape
 
-Nous avons un premier parcours RAG testé. Nous devons maintenant relire les
-choix J1, confirmer le socle final et la licence du générateur avec le professeur,
+Nous avons un premier parcours RAG testé. La revue du contenu J1 est faite le 15 novembre. Nous devons maintenant
+confirmer le socle final et la licence du générateur avec le professeur,
 puis mesurer la mémoire et préparer une reconstruction propre.
 
 Pour respecter J5, nous choisirons avant les essais de reconstruction qui sera

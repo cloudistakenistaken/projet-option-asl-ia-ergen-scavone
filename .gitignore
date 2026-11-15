@@ -221,3 +221,6 @@ __marimo__/
 
 # Index vectoriel et résultats locaux, reconstructibles depuis le corpus.
 .local/
+
+# Environnement facultatif pour exporter la documentation
+.venv-docs/
