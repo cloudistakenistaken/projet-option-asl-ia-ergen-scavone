@@ -77,3 +77,42 @@ puis mesurer la mémoire et préparer la reconstruction complète pour J2.
 
 Le [journal commun du 6 novembre](../journal/2026-11-06.md) détaille le travail
 réalisé ensemble et [la checklist J1](../jalons/j1.md) regroupe les preuves.
+
+## 17 novembre 2026 — automatisation de la reconstruction
+
+### Mon travail pendant la séance
+
+J'ai travaillé avec Gabriel sur l'ensemble de cette séance, avec l'aide d'un
+assistant IA. Nous avons relu les instructions du README et décidé de réunir
+les étapes d'installation, de téléchargement des modèles, d'indexation et de
+tests dans un script unique.
+
+Nous avons créé `scripts/setup.sh`. Le script prépare l'environnement Python,
+installe Ollama si nécessaire, vérifie que son serveur répond, télécharge et
+contrôle les modèles, reconstruit l'index Chroma et exécute les tests unitaires
+et d'intégration. Nous avons également ajouté `make setup` dans le Makefile et
+expliqué cette nouvelle procédure dans le README.
+
+Nous avons ensuite amélioré le parcours utilisateur : après une préparation
+réussie, le script affiche un exemple de commande `curl`, puis démarre l'API
+avec `make serve`. Nous avons lancé l'API et vérifié une requête sur le VPN en
+télétravail ; la source et la réponse obtenues étaient cohérentes. La sortie
+JSON peut être rendue lisible avec `python3 -m json.tool`.
+
+### Ce que je retiens
+
+L'automatisation permet de limiter les oublis entre les dépendances, les modèles
+et l'index. Le serveur Ollama peut être réutilisé s'il est déjà actif ou démarré
+temporairement par le script, tandis que le serveur FastAPI reste lancé pour
+permettre les requêtes de démonstration.
+
+### Difficultés et suite
+
+Nous avons validé la syntaxe du script et le format des modifications. Les tests
+unitaires ont été lancés, mais n'ont pas produit de résultat dans le délai de
+l'environnement ; ils devront être rejoués complètement dans des conditions
+stables. Nous devrons aussi réaliser la reconstruction complète sur une machine
+propre.
+
+Le [journal commun du 17 novembre](../journal/2026-11-17.md) détaille notre
+travail réalisé ensemble.

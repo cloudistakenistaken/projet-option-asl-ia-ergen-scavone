@@ -111,6 +111,27 @@ ni service payant. La télémétrie anonymisée de Chroma est désactivée.
 
 ### 4. Construire l'index, lancer et tester
 
+Pour automatiser toute la préparation (dépendances Python, installation
+d'Ollama si nécessaire, téléchargement et vérification des modèles, index et
+tests), exécuter depuis la racine :
+
+```bash
+bash scripts/setup.sh
+```
+
+Le script réutilise Ollama s'il répond déjà. Sinon, il démarre un serveur
+temporaire et l'arrête à la fin. Une fois la reconstruction et les tests
+terminés, il démarre automatiquement l'API avec `make serve` et affiche une
+commande `curl` de démonstration à exécuter dans un autre terminal.
+
+La même procédure est disponible via Make :
+
+```bash
+make setup
+```
+
+Pour les étapes manuelles :
+
 ```bash
 make ingest
 make test

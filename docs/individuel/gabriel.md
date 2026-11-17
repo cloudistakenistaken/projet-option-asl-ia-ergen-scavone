@@ -77,3 +77,40 @@ puis mesurer la mémoire et préparer la reconstruction complète pour J2.
 
 Le [journal commun du 6 novembre](../journal/2026-11-06.md) détaille le travail
 réalisé ensemble et [la checklist J1](../jalons/j1.md) regroupe les preuves.
+
+## 17 novembre 2026 — automatisation de la reconstruction
+
+### Mon travail pendant la séance
+
+J'ai travaillé avec Halil sur l'ensemble de cette séance, avec l'aide d'un
+assistant IA. Nous avons étudié les étapes du README et constaté qu'elles
+pouvaient être regroupées dans un seul script pour réduire les erreurs de
+manipulation.
+
+Nous avons créé `scripts/setup.sh`. Il installe les dépendances Python, installe
+Ollama s'il manque, vérifie son serveur, télécharge et vérifie les modèles,
+reconstruit l'index Chroma, puis lance les tests unitaires et d'intégration.
+Nous avons aussi ajouté la cible `make setup` et documenté son utilisation dans
+le README. Quand toutes les étapes réussissent, le script affiche un exemple de
+requête `curl`, puis lance automatiquement `make serve`.
+
+Nous avons lancé l'API et vérifié une requête réelle sur le télétravail : la
+réponse retrouvait bien `public/teletravail.md` et indiquait que le VPN est
+obligatoire. Nous avons enfin ajouté une commande de mise en forme JSON avec
+`python3 -m json.tool`.
+
+### Ce que je retiens
+
+Un script d'orchestration rend la reconstruction plus reproductible et donne un
+parcours clair à une personne qui découvre le projet. Il faut aussi distinguer
+la préparation de l'index, le démarrage de l'API et l'envoi d'une requête.
+
+### Difficultés et suite
+
+La syntaxe Bash et les contrôles de format ont été vérifiés. Le lancement des
+tests unitaires a été tenté, mais l'environnement n'a pas renvoyé de résultat
+avant le délai disponible. Il faudra rejouer la procédure complète sur une
+machine propre et conserver le résultat des tests.
+
+Le [journal commun du 17 novembre](../journal/2026-11-17.md) détaille notre
+travail réalisé ensemble.

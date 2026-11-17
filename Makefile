@@ -1,9 +1,12 @@
 PYTHON := .venv/bin/python
 
-.PHONY: bootstrap models ingest serve test integration demo
+.PHONY: bootstrap models ingest setup serve test integration demo
 
 bootstrap:
 	bash scripts/bootstrap.sh
+
+setup:
+	bash scripts/setup.sh
 
 # Téléchargements initiaux explicites ; Ollama doit déjà être démarré.
 models:
