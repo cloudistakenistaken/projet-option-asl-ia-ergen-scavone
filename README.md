@@ -190,7 +190,9 @@ contient aucun vrai secret ni document confidentiel réel.
 
 ## Nos documents et les points encore ouverts
 
-Le contenu J1 a été vérifié le 15 novembre 2026 contre les six attendus fournis.
+Le contenu J1 a été vérifié ensemble le 6 novembre 2026 contre les six attendus fournis.
+Les changements figurent dans le commit du 15 novembre après un oubli de push ;
+la séance est détaillée dans le [journal commun](docs/journal/2026-11-06.md).
 L'[architecture PDF](docs/architecture/architecture.pdf) tient sur trois pages.
 Le commit de revue et le tag J1 restent à créer ; l'acceptation du professeur
 et le respect de l'échéance du 6 novembre ne sont pas attestés par cette revue.

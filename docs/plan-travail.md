@@ -24,7 +24,7 @@ Toutes les heures sont celles de Paris.
 
 ## Notre prochaine étape
 
-Nous avons un premier parcours RAG testé. La revue du contenu J1 est faite le 15 novembre. Nous devons maintenant
+Nous avons un premier parcours RAG testé. La revue du contenu J1 a été faite ensemble le 6 novembre (commit du 15 novembre après un oubli de push). Nous devons maintenant
 confirmer le socle final et la licence du générateur avec le professeur,
 puis mesurer la mémoire et préparer une reconstruction propre.
 
