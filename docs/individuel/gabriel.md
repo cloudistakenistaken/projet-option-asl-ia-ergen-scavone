@@ -114,3 +114,44 @@ machine propre et conserver le résultat des tests.
 
 Le [journal commun du 17 novembre](../journal/2026-11-17.md) détaille notre
 travail réalisé ensemble.
+
+## 18 novembre 2026 — enrichissement des données et mesure J2
+
+### Mon travail pendant la séance
+
+J'ai travaillé avec Halil sur l'ensemble de cette séance. Nous avons réalisé
+ensemble, sans séparation des tâches, les modifications du corpus et de la
+documentation J2.
+
+Nous avons enrichi les deux documents publics sur les congés et le télétravail
+avec des informations fictives supplémentaires : report des jours, portail RH,
+fermetures collectives, prévenance, jours de présence et authentification
+multifacteur. Nous avons aussi complété le document confidentiel Aurore avec
+son objectif, l'équipe pilote, la ventilation du budget et la durée de la phase
+pilote. Nous avons réingéré les trois documents dans Chroma.
+
+Nous avons ajouté un inventaire du corpus dans la preuve de latence : deux
+documents publics et un document confidentiel, avec leurs titres, tailles,
+nombres de mots, empreintes SHA-256 et thèmes. Nous avons enfin relancé la
+mesure sur cinq questions fixes, avec cinq exécutions par question après un
+échauffement, soit 25 exécutions mesurées.
+
+### Ce que je retiens
+
+Une mesure de temps de réponse doit conserver le jeu de questions, la
+configuration du modèle, la machine et les données utilisées. Après
+l'enrichissement, la médiane mesurée est de 1 877,51 ms et l'IQR de 2 162,23 ms.
+La moyenne est influencée par des valeurs plus élevées ; la médiane et l'IQR
+sont donc les indicateurs les plus lisibles pour cette série.
+
+### Difficultés et suite
+
+La première régénération de la preuve n'avait pas encore remplacé les anciennes
+métadonnées du corpus. Nous avons vérifié le processus de benchmark, relancé la
+mesure avec l'API locale, puis contrôlé le JSON, la syntaxe Python et le format
+Git. Il reste à intégrer ces changements dans le commit et à déplacer le tag
+J2 comme prévu.
+
+Le [journal commun du 18 novembre](../journal/2026-11-18.md) détaille ce travail
+réalisé ensemble, et la [preuve de latence](../preuves/2026-11-18/j2-latence.json)
+conserve les données et les mesures.

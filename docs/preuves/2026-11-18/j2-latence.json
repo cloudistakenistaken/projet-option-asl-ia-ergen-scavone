@@ -1,0 +1,298 @@
+{
+  "measured_at": "2026-11-18T16:31:26.367617+00:00",
+  "endpoint": "http://127.0.0.1:8000/ask",
+  "machine": {
+    "hostname": "LAPTOP-LSGRMJMH",
+    "os": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "kernel": "6.18.58.1-microsoft-standard-WSL2",
+    "architecture": "x86_64",
+    "python": "3.14.4",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13620H"
+  },
+  "model": "qwen2.5:3b",
+  "protocol": {
+    "questions": [
+      "Combien de jours de congés par an et quel délai pour les demander ?",
+      "Le VPN est-il obligatoire en télétravail ?",
+      "Quel est le budget du projet Aurore ?",
+      "Combien de jours de télétravail sont autorisés par semaine ?",
+      "Qui doit valider une demande de congés ?"
+    ],
+    "warmup_per_question": 1,
+    "top_k": 2,
+    "temperature": 0,
+    "seed": 42
+  },
+  "corpus": {
+    "root": "data/corpus",
+    "classification_note": "Le répertoire confidentiel correspond aux données privées fictives du scénario.",
+    "total_document_count": 3,
+    "groups": {
+      "public": {
+        "document_count": 2,
+        "documents": [
+          {
+            "path": "public/conges.md",
+            "title": "Novalys — Politique de congés",
+            "bytes": 637,
+            "words": 102,
+            "sha256": "a91109f9615995472b42229669c186d076d768ff5500a067640e068a64f1c1af",
+          "topics": [
+            "25 jours/an",
+            "délai de 14 jours",
+            "report de 5 jours",
+            "portail RH"
+            ]
+          },
+          {
+            "path": "public/teletravail.md",
+            "title": "Novalys — Télétravail",
+            "bytes": 664,
+            "words": 89,
+            "sha256": "c4d1babc487b95b160db06ab8bfa07a7d07cf92b60aeb676f23f036568b5caa9",
+          "topics": [
+            "2 jours/semaine",
+            "VPN obligatoire",
+            "prévenance de 3 jours",
+            "authentification multifacteur"
+            ]
+          }
+        ]
+      },
+      "confidentiel": {
+        "document_count": 1,
+        "documents": [
+          {
+            "path": "confidentiel/aurore.md",
+            "title": "Novalys — Projet Aurore",
+            "bytes": 874,
+            "words": 132,
+            "sha256": "7529471f6fec4f607fefd0580b97b9c0080f45add4ad35ed6b0c4dc7e47c9ebc",
+          "topics": [
+            "projet Aurore",
+            "15 mars 2027",
+            "budget 420 000 euros",
+            "équipe pilote",
+            "phase pilote de 6 semaines"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "summary": {
+    "metric": "HTTP POST /ask, temps aller-retour, échauffement exclu",
+    "question_count": 5,
+    "repetitions_per_question": 5,
+    "measured_executions": 25,
+    "median_ms": 1877.51,
+    "mean_ms": 2760.1,
+    "min_ms": 1598.05,
+    "max_ms": 4777.99,
+    "q1_ms": 1750.81,
+    "q3_ms": 3913.04,
+    "iqr_ms": 2162.23
+  },
+  "measurements": [
+    {
+      "question": "Combien de jours de congés par an et quel délai pour les demander ?",
+      "repetition": 1,
+      "http_total_ms": 4167.94,
+      "service_total_ms": 4165.74,
+      "retrieval_ms": 21.59,
+      "generation_ms": 4144.15
+    },
+    {
+      "question": "Combien de jours de congés par an et quel délai pour les demander ?",
+      "repetition": 2,
+      "http_total_ms": 4184.04,
+      "service_total_ms": 4181.56,
+      "retrieval_ms": 65.39,
+      "generation_ms": 4116.17
+    },
+    {
+      "question": "Combien de jours de congés par an et quel délai pour les demander ?",
+      "repetition": 3,
+      "http_total_ms": 3913.04,
+      "service_total_ms": 3910.86,
+      "retrieval_ms": 97.7,
+      "generation_ms": 3813.17
+    },
+    {
+      "question": "Combien de jours de congés par an et quel délai pour les demander ?",
+      "repetition": 4,
+      "http_total_ms": 3989.67,
+      "service_total_ms": 3987.13,
+      "retrieval_ms": 34.62,
+      "generation_ms": 3952.51
+    },
+    {
+      "question": "Combien de jours de congés par an et quel délai pour les demander ?",
+      "repetition": 5,
+      "http_total_ms": 3953.98,
+      "service_total_ms": 3951.79,
+      "retrieval_ms": 112.21,
+      "generation_ms": 3839.57
+    },
+    {
+      "question": "Le VPN est-il obligatoire en télétravail ?",
+      "repetition": 1,
+      "http_total_ms": 4777.99,
+      "service_total_ms": 4775.56,
+      "retrieval_ms": 162.26,
+      "generation_ms": 4613.3
+    },
+    {
+      "question": "Le VPN est-il obligatoire en télétravail ?",
+      "repetition": 2,
+      "http_total_ms": 4402.05,
+      "service_total_ms": 4399.53,
+      "retrieval_ms": 181.97,
+      "generation_ms": 4217.56
+    },
+    {
+      "question": "Le VPN est-il obligatoire en télétravail ?",
+      "repetition": 3,
+      "http_total_ms": 3737.89,
+      "service_total_ms": 3735.98,
+      "retrieval_ms": 32.49,
+      "generation_ms": 3703.49
+    },
+    {
+      "question": "Le VPN est-il obligatoire en télétravail ?",
+      "repetition": 4,
+      "http_total_ms": 3813.19,
+      "service_total_ms": 3810.89,
+      "retrieval_ms": 22.38,
+      "generation_ms": 3788.5
+    },
+    {
+      "question": "Le VPN est-il obligatoire en télétravail ?",
+      "repetition": 5,
+      "http_total_ms": 3881.68,
+      "service_total_ms": 3878.68,
+      "retrieval_ms": 47.08,
+      "generation_ms": 3831.6
+    },
+    {
+      "question": "Quel est le budget du projet Aurore ?",
+      "repetition": 1,
+      "http_total_ms": 3643.26,
+      "service_total_ms": 3640.79,
+      "retrieval_ms": 113.16,
+      "generation_ms": 3527.63
+    },
+    {
+      "question": "Quel est le budget du projet Aurore ?",
+      "repetition": 2,
+      "http_total_ms": 1911.3,
+      "service_total_ms": 1909.02,
+      "retrieval_ms": 12.91,
+      "generation_ms": 1896.1
+    },
+    {
+      "question": "Quel est le budget du projet Aurore ?",
+      "repetition": 3,
+      "http_total_ms": 1872.54,
+      "service_total_ms": 1870.19,
+      "retrieval_ms": 19.06,
+      "generation_ms": 1851.13
+    },
+    {
+      "question": "Quel est le budget du projet Aurore ?",
+      "repetition": 4,
+      "http_total_ms": 1837.24,
+      "service_total_ms": 1834.52,
+      "retrieval_ms": 21.53,
+      "generation_ms": 1812.99
+    },
+    {
+      "question": "Quel est le budget du projet Aurore ?",
+      "repetition": 5,
+      "http_total_ms": 1877.51,
+      "service_total_ms": 1875.12,
+      "retrieval_ms": 24.9,
+      "generation_ms": 1850.22
+    },
+    {
+      "question": "Combien de jours de télétravail sont autorisés par semaine ?",
+      "repetition": 1,
+      "http_total_ms": 1727.84,
+      "service_total_ms": 1725.74,
+      "retrieval_ms": 26.53,
+      "generation_ms": 1699.21
+    },
+    {
+      "question": "Combien de jours de télétravail sont autorisés par semaine ?",
+      "repetition": 2,
+      "http_total_ms": 1635.33,
+      "service_total_ms": 1633.26,
+      "retrieval_ms": 18.12,
+      "generation_ms": 1615.14
+    },
+    {
+      "question": "Combien de jours de télétravail sont autorisés par semaine ?",
+      "repetition": 3,
+      "http_total_ms": 1614.78,
+      "service_total_ms": 1612.46,
+      "retrieval_ms": 18.4,
+      "generation_ms": 1594.06
+    },
+    {
+      "question": "Combien de jours de télétravail sont autorisés par semaine ?",
+      "repetition": 4,
+      "http_total_ms": 1626.84,
+      "service_total_ms": 1624.98,
+      "retrieval_ms": 17.38,
+      "generation_ms": 1607.6
+    },
+    {
+      "question": "Combien de jours de télétravail sont autorisés par semaine ?",
+      "repetition": 5,
+      "http_total_ms": 1598.05,
+      "service_total_ms": 1595.77,
+      "retrieval_ms": 21.1,
+      "generation_ms": 1574.68
+    },
+    {
+      "question": "Qui doit valider une demande de congés ?",
+      "repetition": 1,
+      "http_total_ms": 1750.11,
+      "service_total_ms": 1747.36,
+      "retrieval_ms": 26.23,
+      "generation_ms": 1721.14
+    },
+    {
+      "question": "Qui doit valider une demande de congés ?",
+      "repetition": 2,
+      "http_total_ms": 1791.15,
+      "service_total_ms": 1789.02,
+      "retrieval_ms": 32.86,
+      "generation_ms": 1756.16
+    },
+    {
+      "question": "Qui doit valider une demande de congés ?",
+      "repetition": 3,
+      "http_total_ms": 1750.81,
+      "service_total_ms": 1748.85,
+      "retrieval_ms": 15.16,
+      "generation_ms": 1733.7
+    },
+    {
+      "question": "Qui doit valider une demande de congés ?",
+      "repetition": 4,
+      "http_total_ms": 1787.34,
+      "service_total_ms": 1785.24,
+      "retrieval_ms": 52.07,
+      "generation_ms": 1733.17
+    },
+    {
+      "question": "Qui doit valider une demande de congés ?",
+      "repetition": 5,
+      "http_total_ms": 1756.86,
+      "service_total_ms": 1754.4,
+      "retrieval_ms": 26.94,
+      "generation_ms": 1727.45
+    }
+  ]
+}
