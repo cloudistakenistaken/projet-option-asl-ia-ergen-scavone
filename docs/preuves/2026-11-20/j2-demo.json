@@ -1,0 +1,29 @@
+{
+    "mode": "baseline",
+    "answer": "Le VPN est obligatoire pendant le t\u00e9l\u00e9travail. Cela est mentionn\u00e9 dans le document public interne de d\u00e9monstration de Novalys, disponible dans [S1] public/teletravail.md.",
+    "sources": [
+        {
+            "citation": "S1",
+            "id": "a17abe07c1264a0537afcf38f68233cbd7766c498480e1d3d99c78f5bf722d9e",
+            "source": "public/teletravail.md",
+            "classification": "public",
+            "chunk": 0,
+            "text": "# Novalys \u2014 T\u00e9l\u00e9travail\n\nDocument public interne de d\u00e9monstration. Entreprise et donn\u00e9es enti\u00e8rement fictives.\n\nLe t\u00e9l\u00e9travail est autoris\u00e9 jusqu'\u00e0 2 jours par semaine.\nIl n\u00e9cessite la validation du responsable.\nL'utilisation du VPN est obligatoire pendant le t\u00e9l\u00e9travail.\nLes jours t\u00e9l\u00e9travaill\u00e9s sont choisis dans l'\u00e9quipe avec un d\u00e9lai de pr\u00e9venance\nde 3 jours ouvr\u00e9s, sauf urgence valid\u00e9e par le responsable.\nLes r\u00e9unions d'\u00e9quipe du mardi matin et les permanences d'accueil sont assur\u00e9es\nsur site.\nL'ordinateur professionnel et l'authentification multifacteur sont obligatoires\npour acc\u00e9der aux outils de Novalys depuis le domicile.",
+            "distance": 0.10229980945587158
+        },
+        {
+            "citation": "S2",
+            "id": "8dfeb9216b81258f11c50aac8903f618a835c5a4b8fe03ead2a140ed29fd954c",
+            "source": "public/conges.md",
+            "classification": "public",
+            "chunk": 0,
+            "text": "# Novalys \u2014 Politique de cong\u00e9s\n\nDocument public interne de d\u00e9monstration. Entreprise et donn\u00e9es enti\u00e8rement fictives.\n\nChaque salari\u00e9 dispose de 25 jours de cong\u00e9s par an.\nLa demande doit \u00eatre d\u00e9pos\u00e9e au moins 14 jours avant le d\u00e9part.\nElle doit \u00eatre valid\u00e9e par le responsable.\nLes jours non pris peuvent \u00eatre report\u00e9s jusqu'au 31 mars de l'ann\u00e9e suivante,\ndans la limite de 5 jours.\nLes p\u00e9riodes de fermeture collective sont annonc\u00e9es par les ressources humaines\nau moins 2 mois \u00e0 l'avance.\nLa demande se fait dans le portail RH ; le salari\u00e9 re\u00e7oit un courriel lorsque\nson responsable l'a accept\u00e9e ou refus\u00e9e.",
+            "distance": 0.20163792371749878
+        }
+    ],
+    "latency_ms": {
+        "retrieval": 12.42,
+        "generation": 954.75,
+        "total": 967.17
+    }
+}

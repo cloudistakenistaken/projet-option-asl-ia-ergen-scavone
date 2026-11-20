@@ -1,0 +1,253 @@
+
+==> Installation des dépendances Python
+bash scripts/bootstrap.sh
+Looking in indexes: https://download.pytorch.org/whl/cpu
+Requirement already satisfied: torch==2.9.0+cpu in ./.venv/lib/python3.14/site-packages (2.9.0+cpu)
+Requirement already satisfied: filelock in ./.venv/lib/python3.14/site-packages (from torch==2.9.0+cpu) (3.32.3)
+Requirement already satisfied: typing-extensions>=4.10.0 in ./.venv/lib/python3.14/site-packages (from torch==2.9.0+cpu) (4.16.0)
+Requirement already satisfied: setuptools in ./.venv/lib/python3.14/site-packages (from torch==2.9.0+cpu) (78.1.0)
+Requirement already satisfied: sympy>=1.13.3 in ./.venv/lib/python3.14/site-packages (from torch==2.9.0+cpu) (1.14.0)
+Requirement already satisfied: networkx>=2.5.1 in ./.venv/lib/python3.14/site-packages (from torch==2.9.0+cpu) (3.6.1)
+Requirement already satisfied: jinja2 in ./.venv/lib/python3.14/site-packages (from torch==2.9.0+cpu) (3.1.6)
+Requirement already satisfied: fsspec>=0.8.5 in ./.venv/lib/python3.14/site-packages (from torch==2.9.0+cpu) (2026.7.0)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in ./.venv/lib/python3.14/site-packages (from sympy>=1.13.3->torch==2.9.0+cpu) (1.3.0)
+Requirement already satisfied: MarkupSafe>=2.0 in ./.venv/lib/python3.14/site-packages (from jinja2->torch==2.9.0+cpu) (3.0.3)
+
+[notice] A new release of pip is available: 26.2.2 -> 26.3
+[notice] To update, run: /home/lulu/projet-option-asl-ia-ergen-scavone/.venv/bin/python -m pip install --upgrade pip
+Requirement already satisfied: aiohappyeyeballs==2.7.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 3)) (2.7.1)
+Requirement already satisfied: aiohttp==3.14.5 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 4)) (3.14.5)
+Requirement already satisfied: aiohttp-retry==2.9.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 5)) (2.9.1)
+Requirement already satisfied: aiosignal==1.4.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 6)) (1.4.0)
+Requirement already satisfied: annotated-doc==0.0.5 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 7)) (0.0.5)
+Requirement already satisfied: annotated-types==0.8.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 8)) (0.8.0)
+Requirement already satisfied: anyio==4.15.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 9)) (4.15.1)
+Requirement already satisfied: attrs==26.1.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 10)) (26.1.0)
+Requirement already satisfied: backoff==2.2.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 11)) (2.2.1)
+Requirement already satisfied: bcrypt==5.0.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 12)) (5.0.0)
+Requirement already satisfied: build==1.6.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 13)) (1.6.1)
+Requirement already satisfied: certifi==2026.10.23 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 14)) (2026.10.23)
+Requirement already satisfied: charset-normalizer==3.5.2 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 15)) (3.5.2)
+Requirement already satisfied: chromadb==1.0.20 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 16)) (1.0.20)
+Requirement already satisfied: click==8.5.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 17)) (8.5.0)
+Requirement already satisfied: cloudpickle==3.1.2 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 18)) (3.1.2)
+Requirement already satisfied: distro==1.9.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 19)) (1.9.0)
+Requirement already satisfied: durationpy==0.11 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 20)) (0.11)
+Requirement already satisfied: fastapi==0.115.12 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 21)) (0.115.12)
+Requirement already satisfied: filelock==3.32.3 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 22)) (3.32.3)
+Requirement already satisfied: flatbuffers==25.12.19 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 23)) (25.12.19)
+Requirement already satisfied: frozenlist==1.8.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 24)) (1.8.0)
+Requirement already satisfied: fsspec==2026.7.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 25)) (2026.7.0)
+Requirement already satisfied: googleapis-common-protos==1.76.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 26)) (1.76.0)
+Requirement already satisfied: grpcio==1.84.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 27)) (1.84.1)
+Requirement already satisfied: h11==0.16.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 28)) (0.16.0)
+Requirement already satisfied: hf-xet==1.7.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 29)) (1.7.0)
+Requirement already satisfied: httpcore==1.0.9 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 30)) (1.0.9)
+Requirement already satisfied: httptools==0.9.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 31)) (0.9.0)
+Requirement already satisfied: httpx==0.28.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 32)) (0.28.1)
+Requirement already satisfied: huggingface_hub==0.36.2 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 33)) (0.36.2)
+Requirement already satisfied: idna==3.20 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 34)) (3.20)
+Requirement already satisfied: importlib_resources==7.1.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 35)) (7.1.0)
+Requirement already satisfied: iniconfig==2.3.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 36)) (2.3.1)
+Requirement already satisfied: Jinja2==3.1.6 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 37)) (3.1.6)
+Requirement already satisfied: joblib==1.6.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 38)) (1.6.0)
+Requirement already satisfied: jsonschema==4.26.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 39)) (4.26.0)
+Requirement already satisfied: jsonschema-specifications==2025.9.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 40)) (2025.9.1)
+Requirement already satisfied: kubernetes==37.0.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 41)) (37.0.1)
+Requirement already satisfied: markdown-it-py==4.2.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 42)) (4.2.0)
+Requirement already satisfied: MarkupSafe==3.0.3 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 43)) (3.0.3)
+Requirement already satisfied: mdurl==0.1.2 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 44)) (0.1.2)
+Requirement already satisfied: mmh3==5.3.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 45)) (5.3.1)
+Requirement already satisfied: mpmath==1.3.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 46)) (1.3.0)
+Requirement already satisfied: multidict==7.1.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 47)) (7.1.0)
+Requirement already satisfied: narwhals==2.27.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 48)) (2.27.1)
+Requirement already satisfied: networkx==3.6.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 49)) (3.6.1)
+Requirement already satisfied: numpy==2.2.6 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 50)) (2.2.6)
+Requirement already satisfied: oauthlib==4.0.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 51)) (4.0.0)
+Requirement already satisfied: onnxruntime==1.31.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 52)) (1.31.0)
+Requirement already satisfied: opentelemetry-api==1.45.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 53)) (1.45.1)
+Requirement already satisfied: opentelemetry-exporter-otlp-common==0.66b1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 54)) (0.66b1)
+Requirement already satisfied: opentelemetry-exporter-otlp-proto-common==1.45.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 55)) (1.45.1)
+Requirement already satisfied: opentelemetry-exporter-otlp-proto-grpc==1.45.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 56)) (1.45.1)
+Requirement already satisfied: opentelemetry-proto==1.45.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 57)) (1.45.1)
+Requirement already satisfied: opentelemetry-sdk==1.45.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 58)) (1.45.1)
+Requirement already satisfied: opentelemetry-semantic-conventions==0.66b1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 59)) (0.66b1)
+Requirement already satisfied: orjson==3.13.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 60)) (3.13.0)
+Requirement already satisfied: overrides==7.7.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 61)) (7.7.0)
+Requirement already satisfied: packaging==26.3 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 62)) (26.3)
+Requirement already satisfied: pillow==13.0.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 63)) (13.0.0)
+Requirement already satisfied: pip==26.2.2 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 64)) (26.2.2)
+Requirement already satisfied: pluggy==1.7.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 65)) (1.7.0)
+Requirement already satisfied: posthog==5.4.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 66)) (5.4.0)
+Requirement already satisfied: propcache==0.5.4 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 67)) (0.5.4)
+Requirement already satisfied: protobuf==7.36.2 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 68)) (7.36.2)
+Requirement already satisfied: pybase64==1.5.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 69)) (1.5.1)
+Requirement already satisfied: pydantic==2.14.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 70)) (2.14.1)
+Requirement already satisfied: pydantic-settings==2.10.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 71)) (2.10.1)
+Requirement already satisfied: pydantic_core==2.50.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 72)) (2.50.1)
+Requirement already satisfied: Pygments==2.21.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 73)) (2.21.0)
+Requirement already satisfied: PyPika==0.51.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 74)) (0.51.1)
+Requirement already satisfied: pyproject_hooks==1.3.3 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 75)) (1.3.3)
+Requirement already satisfied: pytest==8.4.2 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 76)) (8.4.2)
+Requirement already satisfied: python-dateutil==3.0.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 77)) (3.0.0)
+Requirement already satisfied: python-dotenv==1.2.4 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 78)) (1.2.4)
+Requirement already satisfied: PyYAML==6.0.3 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 79)) (6.0.3)
+Requirement already satisfied: referencing==0.37.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 80)) (0.37.0)
+Requirement already satisfied: regex==2026.9.29 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 81)) (2026.9.29)
+Requirement already satisfied: requests==2.34.2 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 82)) (2.34.2)
+Requirement already satisfied: requests-oauthlib==2.0.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 83)) (2.0.0)
+Requirement already satisfied: rich==15.0.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 84)) (15.0.0)
+Requirement already satisfied: rpds-py==2026.9.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 85)) (2026.9.1)
+Requirement already satisfied: safetensors==0.8.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 86)) (0.8.0)
+Requirement already satisfied: scikit-learn==1.9.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 87)) (1.9.1)
+Requirement already satisfied: scipy==1.18.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 88)) (1.18.1)
+Requirement already satisfied: sentence-transformers==5.1.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 89)) (5.1.1)
+Requirement already satisfied: setuptools==78.1.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 90)) (78.1.0)
+Requirement already satisfied: shellingham==1.5.4 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 91)) (1.5.4)
+Requirement already satisfied: six==1.17.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 92)) (1.17.0)
+Requirement already satisfied: starlette==0.46.2 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 93)) (0.46.2)
+Requirement already satisfied: sympy==1.14.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 94)) (1.14.0)
+Requirement already satisfied: tenacity==9.2.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 95)) (9.2.1)
+Requirement already satisfied: threadpoolctl==3.7.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 96)) (3.7.0)
+Requirement already satisfied: tokenizers==0.22.2 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 97)) (0.22.2)
+Requirement already satisfied: torch==2.9.0+cpu in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 98)) (2.9.0+cpu)
+Requirement already satisfied: tqdm==4.70.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 99)) (4.70.1)
+Requirement already satisfied: transformers==4.56.2 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 100)) (4.56.2)
+Requirement already satisfied: typer==0.27.3 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 101)) (0.27.3)
+Requirement already satisfied: typing-inspection==0.4.4 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 102)) (0.4.4)
+Requirement already satisfied: typing_extensions==4.16.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 103)) (4.16.0)
+Requirement already satisfied: tzdata==2026.5 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 104)) (2026.5)
+Requirement already satisfied: urllib3==2.8.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 105)) (2.8.0)
+Requirement already satisfied: uvicorn==0.35.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 106)) (0.35.0)
+Requirement already satisfied: uvloop==0.23.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 107)) (0.23.0)
+Requirement already satisfied: watchfiles==1.3.0 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 108)) (1.3.0)
+Requirement already satisfied: websocket-client==1.9.2 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 109)) (1.9.2)
+Requirement already satisfied: websockets==17.3 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 110)) (17.3)
+Requirement already satisfied: yarl==1.25.1 in ./.venv/lib/python3.14/site-packages (from -r requirements.lock.txt (line 111)) (1.25.1)
+
+[notice] A new release of pip is available: 26.2.2 -> 26.3
+[notice] To update, run: /home/lulu/projet-option-asl-ia-ergen-scavone/.venv/bin/python -m pip install --upgrade pip
+No broken requirements found.
+Dépendances prêtes. Étape suivante : make models, puis make ingest.
+
+==> Téléchargement et vérification des modèles
+ollama pull qwen2.5:3b
+[?2026h[?25l[1Gpulling manifest ⠋ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠙ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠹ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠸ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠼ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠴ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠦ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠧ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠇ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠏ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠋ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠙ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest ⠹ [K[?25h[?2026l[?2026h[?25l[1Gpulling manifest [K
+pulling 5ee4f07cdb9b: 100% ▕██████████████████▏ 1.9 GB                         [K
+pulling 66b9ea09bd5b: 100% ▕██████████████████▏   68 B                         [K
+pulling eb4402837c78: 100% ▕██████████████████▏ 1.5 KB                         [K
+pulling b5c0e5cf74cf: 100% ▕██████████████████▏ 7.4 KB                         [K
+pulling 161ddde4c9cd: 100% ▕██████████████████▏  487 B                         [K
+verifying sha256 digest [K
+writing manifest [K
+removing unused layers [K
+success [K[?25h[?2026l
+.venv/bin/python -m scripts.check_ollama
+{
+  "name": "qwen2.5:3b",
+  "model": "qwen2.5:3b",
+  "modified_at": "2026-11-20T13:22:19.065038566+01:00",
+  "size": 1929912432,
+  "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+  "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "qwen2",
+    "families": [
+      "qwen2"
+    ],
+    "parameter_size": "3.1B",
+    "quantization_level": "Q4_K_M",
+    "context_length": 32768,
+    "embedding_length": 2048,
+    "runner": "ggml"
+  },
+  "capabilities": [
+    "completion",
+    "tools"
+  ]
+}
+.venv/bin/python -m app.embeddings --download
+Modèle prêt : intfloat/multilingual-e5-small@614241f622f53c4eeff9890bdc4f31cfecc418b3
+Dimension : 384 ; périphérique : CPU
+
+==> Création de l'index Chroma
+.venv/bin/python -m app.ingest
+{
+  "documents": 3,
+  "passages": 3,
+  "index": "/home/lulu/projet-option-asl-ia-ergen-scavone/.local/chroma",
+  "collection": "novalys-baseline"
+}
+
+==> Tests unitaires
+.venv/bin/python -m pytest -m 'not integration' -q
+..............................                                           [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/starlette/testclient.py:37
+  /home/lulu/projet-option-asl-ia-ergen-scavone/.venv/lib/python3.14/site-packages/starlette/testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+.venv/lib/python3.14/site-packages/chromadb/telemetry/opentelemetry/__init__.py:128
+  /home/lulu/projet-option-asl-ia-ergen-scavone/.venv/lib/python3.14/site-packages/chromadb/telemetry/opentelemetry/__init__.py:128: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(f):
+
+.venv/lib/python3.14/site-packages/fastapi/routing.py:233
+.venv/lib/python3.14/site-packages/fastapi/routing.py:233
+  /home/lulu/projet-option-asl-ia-ergen-scavone/.venv/lib/python3.14/site-packages/fastapi/routing.py:233: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    is_coroutine = asyncio.iscoroutinefunction(dependant.call)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+30 passed, 5 deselected, 4 warnings in 0.85s
+
+==> Tests d'intégration
+.venv/bin/python -m pytest -m integration -v
+============================= test session starts ==============================
+platform linux -- Python 3.14.4, pytest-8.4.2, pluggy-1.7.0 -- /home/lulu/projet-option-asl-ia-ergen-scavone/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/lulu/projet-option-asl-ia-ergen-scavone
+configfile: pytest.ini
+testpaths: tests
+plugins: anyio-4.15.1
+collecting ... collected 35 items / 30 deselected / 5 selected
+
+tests/test_integration.py::test_real_french_semantic_retrieval[Combien de jours de cong\xe9s par an ?-public/conges.md] PASSED [ 20%]
+tests/test_integration.py::test_real_french_semantic_retrieval[Le VPN est-il obligatoire en t\xe9l\xe9travail ?-public/teletravail.md] PASSED [ 40%]
+tests/test_integration.py::test_real_french_semantic_retrieval[Quel est le budget du projet Aurore ?-confidentiel/aurore.md] PASSED [ 60%]
+tests/test_integration.py::test_real_token_chunking_preserves_unicode_and_token_budget PASSED [ 80%]
+tests/test_integration.py::test_real_api_with_ollama_returns_facts_and_citations PASSED [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/starlette/testclient.py:37
+  /home/lulu/projet-option-asl-ia-ergen-scavone/.venv/lib/python3.14/site-packages/starlette/testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+.venv/lib/python3.14/site-packages/chromadb/telemetry/opentelemetry/__init__.py:128
+  /home/lulu/projet-option-asl-ia-ergen-scavone/.venv/lib/python3.14/site-packages/chromadb/telemetry/opentelemetry/__init__.py:128: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    if asyncio.iscoroutinefunction(f):
+
+.venv/lib/python3.14/site-packages/fastapi/routing.py:233
+.venv/lib/python3.14/site-packages/fastapi/routing.py:233
+  /home/lulu/projet-option-asl-ia-ergen-scavone/.venv/lib/python3.14/site-packages/fastapi/routing.py:233: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+    is_coroutine = asyncio.iscoroutinefunction(dependant.call)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================= 5 passed, 30 deselected, 4 warnings in 8.92s =================
+
+==> Préparation terminée avec succès
+L'API va maintenant démarrer sur http://127.0.0.1:8000.
+Dans un autre terminal, vous pourrez envoyer une requête avec :
+
+curl --fail http://127.0.0.1:8000/ask \
+  -H 'Content-Type: application/json' \
+  -d '{"question":"Le VPN est-il obligatoire en télétravail ?","top_k":2}' \
+  | python3 -m json.tool
+
+Arrêtez le serveur avec Ctrl+C.
+.venv/bin/python -m uvicorn app.api:app --host 127.0.0.1 --port 8000 --workers 1
+INFO:     Started server process [5762]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:58914 - "POST /ask HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53512 - "POST /ask HTTP/1.1" 200 OK
