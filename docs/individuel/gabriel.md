@@ -155,3 +155,26 @@ J2 comme prévu.
 Le [journal commun du 18 novembre](../journal/2026-11-18.md) détaille ce travail
 réalisé ensemble, et la [preuve de latence](../preuves/2026-11-18/j2-latence.json)
 conserve les données et les mesures.
+
+## 22 novembre 2026 — interface web locale
+
+### Mon travail pendant la séance
+
+J'ai travaillé avec Halil sur l'ensemble de cette séance. Nous avons fait à deux
+la conception, le code, les tests et la documentation de la page web. Nous avons
+ajouté une page servie par FastAPI pour poser une question dans le navigateur et
+afficher la réponse, les sources et les latences, sans devoir écrire la requête
+dans un terminal.
+
+Nous avons aussi sécurisé l'affichage côté navigateur avec `textContent`, afin
+qu'une balise renvoyée par le modèle reste du texte brut. Nous avons ajouté le
+test de la page et relié cette évolution au scénario LLM05 de J3.
+
+### Ce que je retiens
+
+Une interface améliore la démonstration, mais elle ne doit pas faire confiance
+au texte produit par le modèle. Le serveur reste responsable de la validation et
+la page doit traiter la réponse comme une donnée non fiable.
+
+Le [journal commun du 22 novembre](../journal/2026-11-22.md) détaille notre
+travail réalisé ensemble.

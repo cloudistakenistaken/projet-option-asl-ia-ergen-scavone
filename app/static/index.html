@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Novalys · Assistant documentaire</title>
+  <style>
+    :root { color-scheme: dark; --ink: #f5f7fb; --muted: #aab3c5; --line: #29344a; --panel: #131b2b; --panel-2: #19243a; --accent: #7c9cff; --ok: #75d6a0; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; color: var(--ink); background: radial-gradient(circle at 80% 0%, #273868 0, #101726 42%, #0b101c 100%); font: 16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, sans-serif; }
+    main { width: min(1080px, calc(100% - 32px)); margin: 0 auto; padding: 48px 0 64px; }
+    .eyebrow { color: var(--ok); font-size: .76rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 10px 0 8px; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -.06em; line-height: 1.02; }
+    .intro { max-width: 660px; margin: 0 0 32px; color: var(--muted); font-size: 1.05rem; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(260px, .8fr); gap: 20px; align-items: start; }
+    .card { border: 1px solid var(--line); border-radius: 20px; background: #131b2bf0; box-shadow: 0 18px 60px #05091266; }
+    .ask-card { padding: 22px; }
+    label { display: block; margin-bottom: 10px; font-weight: 700; }
+    textarea { display: block; width: 100%; min-height: 132px; resize: vertical; padding: 16px; border: 1px solid #3a4761; border-radius: 14px; outline: none; color: var(--ink); background: #0d1422; font: inherit; }
+    textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px #7c9cff22; }
+    .actions { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 14px; }
+    button { padding: 11px 18px; border: 0; border-radius: 10px; color: #10172a; background: linear-gradient(135deg, #a9bbff, var(--accent)); font: inherit; font-weight: 800; cursor: pointer; }
+    button:disabled { cursor: wait; opacity: .6; }
+    .hint, .status { color: var(--muted); font-size: .88rem; }
+    .status.error { color: #ff9d9d; }
+    .status.ok { color: var(--ok); }
+    .answer { margin-top: 20px; padding: 22px; border-radius: 16px; background: var(--panel-2); white-space: pre-wrap; }
+    .answer h2, .sources h2 { margin: 0 0 12px; font-size: 1.05rem; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 14px; color: var(--muted); font-size: .82rem; }
+    .sources { margin-top: 20px; padding: 20px; }
+    .source { padding: 13px 0; border-top: 1px solid var(--line); }
+    .source:first-of-type { border-top: 0; padding-top: 0; }
+    .source strong { color: #bfd0ff; }
+    .source p { margin: 5px 0 0; color: var(--muted); white-space: pre-wrap; }
+    aside { padding: 22px; }
+    aside h2 { margin: 0 0 12px; font-size: 1rem; }
+    aside p { margin: 0 0 14px; color: var(--muted); }
+    .pill { display: inline-block; padding: 4px 9px; border: 1px solid #3e537e; border-radius: 999px; color: #c7d4ff; font-size: .78rem; }
+    @media (max-width: 760px) { main { padding-top: 28px; } .layout { grid-template-columns: 1fr; } .actions { align-items: flex-start; flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">Novalys · RAG local</div>
+    <h1>Pose ta question.</h1>
+    <p class="intro">Interroge les documents fictifs de l’entreprise et consulte la réponse avec les passages utilisés comme sources.</p>
+    <div class="layout">
+      <section class="card ask-card">
+        <form id="question-form">
+          <label for="question">Question</label>
+          <textarea id="question" maxlength="1000" placeholder="Ex. Le VPN est-il obligatoire en télétravail ?" required></textarea>
+          <div class="actions"><span class="hint">Entrée pour envoyer · Maj + Entrée pour un retour à la ligne</span><button id="submit" type="submit">Demander une réponse</button></div>
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+        </form>
+        <article id="result" hidden>
+          <div class="answer"><h2>Réponse</h2><div id="answer-text"></div><div id="meta" class="meta"></div></div>
+          <div class="card sources"><h2>Sources récupérées</h2><div id="sources-list"></div></div>
+        </article>
+      </section>
+      <aside class="card"><h2>Comment ça marche</h2><p>La question est recherchée dans l’index local, puis les passages pertinents sont transmis à Qwen pour générer une réponse.</p><span class="pill">E5 · Chroma · Qwen local</span><p style="margin-top:18px">Les réponses restent expérimentales : vérifie toujours les citations et le contenu des extraits.</p></aside>
+    </div>
+  </main>
+  <script>
+    const form = document.querySelector('#question-form'), question = document.querySelector('#question'), submit = document.querySelector('#submit'), status = document.querySelector('#status'), result = document.querySelector('#result'), answerText = document.querySelector('#answer-text'), meta = document.querySelector('#meta'), sourcesList = document.querySelector('#sources-list');
+    function setStatus(message, kind = '') { status.textContent = message; status.className = `status ${kind}`; }
+    function addText(parent, text, tag = 'span') { const node = document.createElement(tag); node.textContent = text; parent.append(node); }
+    function render(data) {
+      answerText.textContent = data.answer; meta.replaceChildren();
+      addText(meta, `Mode : ${data.mode}`); addText(meta, `Recherche : ${data.latency_ms.retrieval} ms`); addText(meta, `Génération : ${data.latency_ms.generation} ms`);
+      sourcesList.replaceChildren();
+      data.sources.forEach(source => { const item = document.createElement('div'); item.className = 'source'; const title = document.createElement('strong'); title.textContent = `${source.citation} · ${source.source}`; item.append(title); const excerpt = document.createElement('p'); excerpt.textContent = source.text; item.append(excerpt); sourcesList.append(item); });
+      result.hidden = false;
+    }
+    form.addEventListener('submit', async event => {
+      event.preventDefault(); const value = question.value.trim(); if (!value) return; submit.disabled = true; setStatus('Recherche en cours…');
+      try { const response = await fetch('/ask', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({question: value}) }); const data = await response.json(); if (!response.ok) throw new Error(data.detail || 'La requête a échoué.'); render(data); setStatus('Réponse reçue.', 'ok'); }
+      catch (error) { setStatus(error.message, 'error'); } finally { submit.disabled = false; }
+    });
+    question.addEventListener('keydown', event => { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); form.requestSubmit(); } });
+  </script>
+</body>
+</html>

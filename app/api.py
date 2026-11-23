@@ -1,9 +1,11 @@
 """API locale de référence : recherche → génération → sources récupérées."""
 
 from functools import lru_cache
+from pathlib import Path
 from time import perf_counter
 
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from app.config import Settings
@@ -14,6 +16,13 @@ from app.security import BASELINE_MODE
 
 # Pas de Swagger via CDN : l'application reste utilisable sans accès Internet.
 app = FastAPI(title='Novalys — RAG local de référence', docs_url=None, redoc_url=None)
+WEB_ROOT = Path(__file__).with_name('static')
+
+
+@app.get('/', include_in_schema=False)
+def web_app() -> FileResponse:
+    """Page locale pour poser une question sans utiliser curl."""
+    return FileResponse(WEB_ROOT / 'index.html', media_type='text/html')
 
 
 class Question(BaseModel):

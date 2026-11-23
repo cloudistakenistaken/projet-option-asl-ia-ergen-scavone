@@ -150,7 +150,11 @@ et la reconstruction complètes sur une machine propre restent à réaliser pour
 
 ## Poser une autre question
 
-Quand `make serve` tourne, l'API est sur `http://127.0.0.1:8000` :
+Quand `make serve` tourne, ouvrir `http://127.0.0.1:8000` dans un navigateur
+pour utiliser l'interface web : saisir une question, consulter la réponse et
+les sources récupérées. Le serveur FastAPI reste lancé dans le terminal, mais
+les questions et les réponses se font désormais dans la page. L'API reste
+disponible pour les tests et les scripts :
 
 ```bash
 curl --fail http://127.0.0.1:8000/ask \

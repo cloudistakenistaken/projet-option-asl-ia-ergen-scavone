@@ -33,9 +33,11 @@ version Git, la configuration du modèle et l'identifiant du scénario.
 ## Limites connues de la référence J3
 
 - Le corpus et les marqueurs utilisés sont fictifs.
-- Il n'existe pas encore d'interface web dans la référence actuelle : le
-  scénario LLM05 est conditionnel et doit être marqué `non applicable` tant
-  qu'un client web n'est pas ajouté.
+- L'interface web locale est maintenant servie par FastAPI sur `/`. Le scénario
+  LLM05 est donc applicable : les réponses et les extraits sont insérés avec
+  `textContent` côté navigateur, sans interprétation HTML. Le test doit tout de
+  même conserver une réponse contenant une balise inoffensive pour vérifier ce
+  comportement.
 - Le prompt système actuel ne contient pas de secret réel. Le scénario LLM07
   vérifie donc l'absence de valeur réservée et la résistance à une demande de
   révélation, sans prétendre mesurer la fuite d'un secret réel.

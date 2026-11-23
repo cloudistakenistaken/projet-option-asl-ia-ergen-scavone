@@ -1,6 +1,6 @@
 PYTHON := .venv/bin/python
 
-.PHONY: bootstrap models ingest setup serve test integration demo
+.PHONY: bootstrap models ingest setup serve test integration demo web
 
 bootstrap:
 	bash scripts/bootstrap.sh
@@ -19,6 +19,8 @@ ingest:
 
 serve:
 	$(PYTHON) -m uvicorn app.api:app --host 127.0.0.1 --port 8000 --workers 1
+
+web: serve
 
 test:
 	$(PYTHON) -m pytest -m 'not integration' -q

@@ -157,3 +157,26 @@ J2 comme prévu.
 Le [journal commun du 18 novembre](../journal/2026-11-18.md) détaille ce travail
 réalisé ensemble, et la [preuve de latence](../preuves/2026-11-18/j2-latence.json)
 conserve les données et les mesures.
+
+## 22 novembre 2026 — interface web locale
+
+### Mon travail pendant la séance
+
+J'ai travaillé avec Gabriel sur l'ensemble de cette séance. Nous avons fait à
+deux la conception, le code, les tests et la documentation de la page web.
+L'utilisateur peut maintenant ouvrir l'adresse locale, poser sa question et
+voir la réponse avec les passages utilisés, au lieu de préparer une commande
+`curl` dans le terminal.
+
+Nous avons prévu les états de chargement et d'erreur, un affichage responsive et
+un rendu en texte brut avec `textContent`. Nous avons également mis à jour la
+fiche J3 pour que le scénario LLM05 soit maintenant testable sur cette interface.
+
+### Ce que je retiens
+
+Le navigateur simplifie la démonstration, mais il ne change pas le rôle de
+FastAPI : la page appelle toujours `/ask` et l'API conserve ses contrôles de
+taille et ses erreurs explicites.
+
+Le [journal commun du 22 novembre](../journal/2026-11-22.md) détaille notre
+travail réalisé ensemble.

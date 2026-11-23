@@ -70,6 +70,14 @@ def test_health_only_checks_api_liveness():
         assert client.get('/health').json()['check'] == 'liveness'
 
 
+def test_web_app_is_served_by_fastapi():
+    with TestClient(api.app) as client:
+        response = client.get('/')
+    assert response.status_code == 200
+    assert 'Pose ta question.' in response.text
+    assert 'textContent' in response.text
+
+
 def test_missing_index_before_service_initialization(tmp_path, monkeypatch):
     monkeypatch.setattr(api, 'Settings', lambda: Settings(_env_file=None, chroma_dir=tmp_path))
     api.get_service.cache_clear()
