@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import os
 import platform
 import statistics
 import subprocess
@@ -12,6 +13,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import httpx
+
+from app.config import Settings
 
 
 QUESTIONS = [
@@ -89,9 +92,19 @@ def main() -> int:
     if args.repetitions < 3:
         parser.error("--repetitions doit être au moins égal à 3")
 
+    settings = Settings()
     records: list[dict[str, object]] = []
     with httpx.Client(base_url=args.url, timeout=180, trust_env=False) as client:
         client.get("/health").raise_for_status()
+        benchmark_user = os.getenv("AUTH_BENCHMARK_USER", "user_a")
+        benchmark_password = (settings.auth_password_user_b
+                              if benchmark_user == "user_b"
+                              else settings.auth_password_user_a)
+        login = client.post("/auth/login", json={
+            "username": benchmark_user,
+            "password": benchmark_password,
+        })
+        login.raise_for_status()
         for question in QUESTIONS:
             client.post("/ask", json={"question": question, "top_k": 2}).raise_for_status()
             for repetition in range(1, args.repetitions + 1):

@@ -6,6 +6,7 @@ import app.api as api
 from app.config import Settings
 from app.generation import GenerationUnavailable, generate
 from app.retrieval import IndexNotReady, Passage, Repository
+from app.security import Authenticator, User
 
 
 @pytest.fixture
@@ -28,6 +29,7 @@ def service(tmp_path, monkeypatch):
     ))
     monkeypatch.setattr(api, 'generate', lambda q, p, s: generate(q, p, s, transport=transport))
     api.app.dependency_overrides[api.get_service] = lambda: service
+    api.app.dependency_overrides[api.current_user] = lambda: User('user_a', 'A')
     yield service
     api.app.dependency_overrides.clear()
 
@@ -68,6 +70,31 @@ def test_service_errors_become_http_errors(service, monkeypatch, error, status):
 def test_health_only_checks_api_liveness():
     with TestClient(api.app) as client:
         assert client.get('/health').json()['check'] == 'liveness'
+
+
+def test_ask_requires_authentication():
+    api.app.dependency_overrides.clear()
+    api.get_authenticator.cache_clear()
+    with TestClient(api.app) as client:
+        response = client.post('/ask', json={'question': 'Congés ?'})
+    assert response.status_code == 401
+
+
+def test_login_sets_session_and_logout_revokes_it():
+    authenticator = Authenticator('alpha-demo', 'beta-demo', 300)
+    api.app.dependency_overrides[api.get_authenticator] = lambda: authenticator
+    try:
+        with TestClient(api.app) as client:
+            login = client.post('/auth/login', json={
+                'username': 'user_a', 'password': 'alpha-demo'
+            })
+            assert login.status_code == 200
+            assert login.json() == {'username': 'user_a'}
+            assert client.get('/auth/me').json() == {'username': 'user_a'}
+            assert client.post('/auth/logout').status_code == 204
+            assert client.get('/auth/me').status_code == 401
+    finally:
+        api.app.dependency_overrides.clear()
 
 
 def test_web_app_is_served_by_fastapi():

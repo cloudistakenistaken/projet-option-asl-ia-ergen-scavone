@@ -2,15 +2,27 @@
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 import httpx
 
+from app.config import Settings
+
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output', type=Path, help='Conserver la réponse JSON comme preuve.')
 args = parser.parse_args()
+settings = Settings()
 
 with httpx.Client(base_url='http://127.0.0.1:8000', timeout=180, trust_env=False) as client:
+    demo_user = os.getenv('AUTH_DEMO_USER', 'user_a')
+    demo_password = (settings.auth_password_user_b if demo_user == 'user_b'
+                     else settings.auth_password_user_a)
+    login = client.post('/auth/login', json={
+        'username': demo_user,
+        'password': demo_password,
+    })
+    login.raise_for_status()
     response = client.post('/ask', json={
         'question': 'Combien de jours de congés par an et quel délai pour les demander ?',
         'top_k': 2,

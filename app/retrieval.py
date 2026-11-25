@@ -21,6 +21,7 @@ class Passage:
     classification: str
     chunk: int
     distance: float = 0.0
+    owner: str | None = None
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -59,26 +60,49 @@ class Repository:
         self.collection.upsert(
             ids=[p.id for p in passages], embeddings=vectors,
             documents=[p.text for p in passages],
-            metadatas=[{'source': p.source, 'classification': p.classification,
-                        'chunk': p.chunk} for p in passages],
+            metadatas=[self._metadata(p) for p in passages],
         )
         current_ids = {p.id for p in passages}
         stale = set(self.collection.get(include=[])['ids']) - current_ids
         if stale:
             self.collection.delete(ids=sorted(stale))
 
-    def search(self, vector: list[list[float]], top_k: int) -> list[Passage]:
+    @staticmethod
+    def _metadata(passage: Passage) -> dict[str, str | int]:
+        metadata: dict[str, str | int] = {
+            'source': passage.source,
+            'classification': passage.classification,
+            'chunk': passage.chunk,
+        }
+        if passage.owner is not None:
+            metadata['owner'] = passage.owner
+        return metadata
+
+    def search(self, vector: list[list[float]], top_k: int,
+               username: str | None = None) -> list[Passage]:
         count = self.collection.count()
         if not count:
             raise IndexNotReady('Index vide : exécuter make ingest.')
-        result = self.collection.query(
-            query_embeddings=vector, n_results=min(top_k, count),
-            include=['documents', 'metadatas', 'distances'],
-        )
+        query: dict = {
+            'query_embeddings': vector,
+            'n_results': min(top_k, count),
+            'include': ['documents', 'metadatas', 'distances'],
+        }
+        if username is not None:
+            # Authenticated employees see public documents and their own
+            # private documents. The owner is derived during ingestion, never
+            # from a request field.
+            query['where'] = {'$or': [
+                {'classification': 'public'},
+                {'owner': username},
+            ]}
+        result = self.collection.query(**query)
+        if not result['ids'][0]:
+            raise IndexNotReady('Aucun document accessible pour cet utilisateur.')
         return [
             Passage(id=id_, text=text, source=meta['source'],
                     classification=meta['classification'], chunk=meta['chunk'],
-                    distance=float(distance))
+                    distance=float(distance), owner=meta.get('owner'))
             for id_, text, meta, distance in zip(
                 result['ids'][0], result['documents'][0],
                 result['metadatas'][0], result['distances'][0], strict=True

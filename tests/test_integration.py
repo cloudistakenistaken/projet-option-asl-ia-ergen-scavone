@@ -5,11 +5,13 @@ import re
 import pytest
 from fastapi.testclient import TestClient
 
+import app.api as api
 from app.api import RagService, app, get_service
 from app.config import ROOT, Settings
 from app.embeddings import LocalEmbedder
 from app.ingest import ingest
 from app.retrieval import Repository
+from app.security import User
 
 pytestmark = pytest.mark.integration
 
@@ -17,7 +19,8 @@ pytestmark = pytest.mark.integration
 @pytest.fixture(scope='module')
 def real_rag(tmp_path_factory):
     settings = Settings(_env_file=None, chroma_dir=tmp_path_factory.mktemp('real-rag'),
-                        corpus_dir=ROOT / 'data/corpus')
+                        corpus_dir=ROOT / 'data/corpus',
+                        user_data_dir=tmp_path_factory.mktemp('users'))
     embedder = LocalEmbedder(settings)
     report = ingest(settings, embedder)
     assert report['documents'] == 3
@@ -51,6 +54,7 @@ def test_real_token_chunking_preserves_unicode_and_token_budget(real_rag):
 
 def test_real_api_with_ollama_returns_facts_and_citations(real_rag):
     app.dependency_overrides[get_service] = lambda: real_rag
+    app.dependency_overrides[api.current_user] = lambda: User('user_a', 'A')
     try:
         with TestClient(app) as client:
             response = client.post('/ask', json={

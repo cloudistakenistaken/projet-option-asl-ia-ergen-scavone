@@ -15,6 +15,14 @@
     .layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(260px, .8fr); gap: 20px; align-items: start; }
     .card { border: 1px solid var(--line); border-radius: 20px; background: #131b2bf0; box-shadow: 0 18px 60px #05091266; }
     .ask-card { padding: 22px; }
+    .auth-card { max-width: 520px; margin-bottom: 20px; padding: 22px; }
+    .auth-card h2 { margin: 0 0 12px; }
+    .auth-card p { margin: 0 0 16px; color: var(--muted); }
+    input { display: block; width: 100%; margin-bottom: 12px; padding: 12px 14px; border: 1px solid #3a4761; border-radius: 10px; outline: none; color: var(--ink); background: #0d1422; font: inherit; }
+    input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px #7c9cff22; }
+    .user-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 20px; color: var(--muted); }
+    .user-bar button { padding: 8px 12px; color: var(--ink); background: #263654; }
+    #login-panel[hidden], #app-panel[hidden] { display: none; }
     label { display: block; margin-bottom: 10px; font-weight: 700; }
     textarea { display: block; width: 100%; min-height: 132px; resize: vertical; padding: 16px; border: 1px solid #3a4761; border-radius: 14px; outline: none; color: var(--ink); background: #0d1422; font: inherit; }
     textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px #7c9cff22; }
@@ -44,6 +52,20 @@
     <div class="eyebrow">Novalys · RAG local</div>
     <h1>Pose ta question.</h1>
     <p class="intro">Interroge les documents fictifs de l’entreprise et consulte la réponse avec les passages utilisés comme sources.</p>
+    <section id="login-panel" class="card auth-card" hidden>
+      <h2>Connexion</h2>
+      <p>Connecte-toi pour accéder aux documents publics et à tes documents privés.</p>
+      <form id="login-form">
+        <label for="username">Utilisateur</label>
+        <input id="username" autocomplete="username" required>
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" autocomplete="current-password" required>
+        <button id="login-submit" type="submit">Se connecter</button>
+        <p id="login-status" class="status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <section id="app-panel" hidden>
+    <div class="user-bar"><span>Connecté en tant que <strong id="current-user"></strong></span><button id="logout" type="button">Se déconnecter</button></div>
     <div class="layout">
       <section class="card ask-card">
         <form id="question-form">
@@ -59,11 +81,16 @@
       </section>
       <aside class="card"><h2>Comment ça marche</h2><p>La question est recherchée dans l’index local, puis les passages pertinents sont transmis à Qwen pour générer une réponse.</p><span class="pill">E5 · Chroma · Qwen local</span><p style="margin-top:18px">Les réponses restent expérimentales : vérifie toujours les citations et le contenu des extraits.</p></aside>
     </div>
+    </section>
   </main>
   <script>
+    const loginPanel = document.querySelector('#login-panel'), appPanel = document.querySelector('#app-panel'), loginForm = document.querySelector('#login-form'), loginSubmit = document.querySelector('#login-submit'), loginStatus = document.querySelector('#login-status'), currentUser = document.querySelector('#current-user'), logout = document.querySelector('#logout');
     const form = document.querySelector('#question-form'), question = document.querySelector('#question'), submit = document.querySelector('#submit'), status = document.querySelector('#status'), result = document.querySelector('#result'), answerText = document.querySelector('#answer-text'), meta = document.querySelector('#meta'), sourcesList = document.querySelector('#sources-list');
     function setStatus(message, kind = '') { status.textContent = message; status.className = `status ${kind}`; }
+    function setLoginStatus(message, kind = '') { loginStatus.textContent = message; loginStatus.className = `status ${kind}`; }
     function addText(parent, text, tag = 'span') { const node = document.createElement(tag); node.textContent = text; parent.append(node); }
+    function showLoggedIn(user) { currentUser.textContent = user.username; loginPanel.hidden = true; appPanel.hidden = false; }
+    function showLoggedOut() { appPanel.hidden = true; loginPanel.hidden = false; }
     function render(data) {
       answerText.textContent = data.answer; meta.replaceChildren();
       addText(meta, `Mode : ${data.mode}`); addText(meta, `Recherche : ${data.latency_ms.retrieval} ms`); addText(meta, `Génération : ${data.latency_ms.generation} ms`);
@@ -73,10 +100,17 @@
     }
     form.addEventListener('submit', async event => {
       event.preventDefault(); const value = question.value.trim(); if (!value) return; submit.disabled = true; setStatus('Recherche en cours…');
-      try { const response = await fetch('/ask', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({question: value}) }); const data = await response.json(); if (!response.ok) throw new Error(data.detail || 'La requête a échoué.'); render(data); setStatus('Réponse reçue.', 'ok'); }
+      try { const response = await fetch('/ask', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({question: value}) }); const data = await response.json(); if (response.status === 401) { showLoggedOut(); throw new Error('Session expirée.'); } if (!response.ok) throw new Error(data.detail || 'La requête a échoué.'); render(data); setStatus('Réponse reçue.', 'ok'); }
       catch (error) { setStatus(error.message, 'error'); } finally { submit.disabled = false; }
     });
     question.addEventListener('keydown', event => { if (event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); form.requestSubmit(); } });
+    loginForm.addEventListener('submit', async event => {
+      event.preventDefault(); loginSubmit.disabled = true; setLoginStatus('Connexion en cours…');
+      try { const response = await fetch('/auth/login', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({username: document.querySelector('#username').value.trim(), password: document.querySelector('#password').value}) }); const data = await response.json(); if (!response.ok) throw new Error(data.detail || 'Identifiants invalides.'); loginForm.reset(); showLoggedIn(data); }
+      catch (error) { setLoginStatus(error.message, 'error'); } finally { loginSubmit.disabled = false; }
+    });
+    logout.addEventListener('click', async () => { await fetch('/auth/logout', {method: 'POST'}); showLoggedOut(); });
+    fetch('/auth/me').then(response => response.ok ? response.json() : Promise.reject()).then(showLoggedIn).catch(showLoggedOut);
   </script>
 </body>
 </html>

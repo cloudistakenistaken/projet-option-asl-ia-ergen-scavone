@@ -22,10 +22,12 @@ Notre première version utilise Python 3.12, FastAPI, E5 multilingue small sur
 CPU, Chroma sur disque et `qwen2.5:3b` sur Ollama. E5 produit des vecteurs de
 384 dimensions ; nous gardons sa révision et les versions des bibliothèques.
 
-**Cette version n'applique pas encore les droits documentaires.** Elle peut
-consulter tout le corpus fictif, y compris Aurore. Ranger un fichier dans
-`confidentiel` ne le protège pas. Le client ne peut pas fournir un champ `role`
-pour se déclarer membre de la direction. Les protections seront ajoutées pour J4.
+L'application demande maintenant une connexion avant toute recherche. Les
+comptes locaux `user_a` et `user_b` voient les documents publics et uniquement
+leur dossier privé (`data/A` ou `data/B`). L'identité vient d'une session HTTP
+créée par le serveur ; le client ne peut pas fournir un champ `role` ou un autre
+utilisateur pour contourner ce contrôle. Les mots de passe sont configurables
+avec `AUTH_PASSWORD_USER_A` et `AUTH_PASSWORD_USER_B` dans `.env`.
 
 ## Lancer le projet sur notre machine déjà préparée
 
@@ -139,30 +141,38 @@ make integration
 make serve
 ```
 
-Puis `make demo` dans un deuxième terminal. Les trois documents donnent
-actuellement trois passages. L'index est conservé dans `.local/chroma`, hors Git.
-Après modification du corpus, arrêter l'API et refaire `make ingest` : les
-anciens passages sont retirés et les doublons évités. Un corpus vide provoque
-une erreur sans supprimer l'index existant.
+Puis `make demo` dans un deuxième terminal. L'index contient les documents
+publics et les deux documents privés. Il est
+conservé dans `.local/chroma`, hors Git. Après modification du corpus ou des
+dossiers `data/A` et `data/B`, arrêter l'API et refaire `make ingest` : les
+anciens passages sont retirés et les doublons évités.
+Un corpus vide provoque une erreur sans supprimer l'index existant.
 
 Cette procédure est écrite et les composants ont été testés. La destruction
 et la reconstruction complètes sur une machine propre restent à réaliser pour J5.
 
 ## Poser une autre question
 
-Quand `make serve` tourne, ouvrir `http://127.0.0.1:8000` dans un navigateur
-pour utiliser l'interface web : saisir une question, consulter la réponse et
-les sources récupérées. Le serveur FastAPI reste lancé dans le terminal, mais
+Quand `make serve` tourne, ouvrir `http://127.0.0.1:8000` dans un navigateur,
+se connecter avec `user_a`/`alpha-demo` ou `user_b`/`beta-demo`, puis saisir une
+question. L'interface affiche les sources récupérées autorisées pour la session.
+Le serveur FastAPI reste lancé dans le terminal, mais
 les questions et les réponses se font désormais dans la page. L'API reste
 disponible pour les tests et les scripts :
 
 ```bash
-curl --fail http://127.0.0.1:8000/ask \
+curl --fail --cookie-jar /tmp/novalys-cookies \
+  http://127.0.0.1:8000/auth/login \
+  -H 'Content-Type: application/json' \
+  -d '{"username":"user_a","password":"alpha-demo"}'
+curl --fail --cookie /tmp/novalys-cookies http://127.0.0.1:8000/ask \
   -H 'Content-Type: application/json' \
   -d '{"question":"Le VPN est-il obligatoire en télétravail ?","top_k":2}'
 ```
 
 `top_k` règle le nombre de passages récupérés : 3 par défaut, de 1 à 5.
+Les routes `/auth/login`, `/auth/me` et `/auth/logout` gèrent la session dans un
+cookie HttpOnly ; `/ask` renvoie `401` si la session est absente ou expirée.
 La réponse contient `answer`, `sources` et `latency_ms` (les durées en millisecondes).
 Chaque source contient le chemin, la classification, l'extrait et son identifiant.
 La liste correspond aux passages donnés au modèle ; elle ne prouve pas que
@@ -247,8 +257,8 @@ par un commit et un push. Nous créons les tags de jalon après vérification de
 | `app/ingest.py` | Lit et découpe les documents pour construire l'index. |
 | `app/retrieval.py` | Enregistre les passages et retrouve les plus proches. |
 | `app/generation.py` | Envoie la question et les passages à Ollama. |
-| `app/api.py` | Reçoit les questions et renvoie les réponses avec les sources. |
-| `app/security.py` | Contient le prompt et les droits prévus, encore non appliqués. |
+| `app/api.py` | Gère la connexion, la session et les questions avec les sources. |
+| `app/security.py` | Hache les mots de passe et conserve les sessions locales. |
 
 ## Documentations officielles utilisées
 

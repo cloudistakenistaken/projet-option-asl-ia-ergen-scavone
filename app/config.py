@@ -22,15 +22,24 @@ class Settings(BaseSettings):
     embedding_revision: str = '614241f622f53c4eeff9890bdc4f31cfecc418b3'
     embedding_cache: Path = ROOT / '.cache/embeddings'
     corpus_dir: Path = ROOT / 'data/corpus'
+    user_data_dir: Path = ROOT / 'data'
     chroma_dir: Path = ROOT / '.local/chroma'
     collection_name: str = 'novalys-baseline'
     chunk_tokens: int = Field(default=220, ge=32, le=400)
     chunk_overlap: int = Field(default=32, ge=0)
     top_k: int = Field(default=3, ge=1, le=5)
+    auth_password_user_a: str = Field(default='alpha-demo', min_length=8)
+    auth_password_user_b: str = Field(default='beta-demo', min_length=8)
+    auth_session_ttl: int = Field(default=8 * 60 * 60, ge=300, le=7 * 24 * 60 * 60)
 
     @field_validator('embedding_cache', 'corpus_dir', 'chroma_dir')
     @classmethod
     def resolve_path(cls, value: Path) -> Path:
+        return (ROOT / value).resolve()
+
+    @field_validator('user_data_dir')
+    @classmethod
+    def resolve_user_data_path(cls, value: Path) -> Path:
         return (ROOT / value).resolve()
 
     @field_validator('ollama_url')
@@ -56,5 +65,5 @@ class Settings(BaseSettings):
             'embedding_revision': self.embedding_revision,
             'chunk_tokens': self.chunk_tokens,
             'chunk_overlap': self.chunk_overlap,
-            'schema_version': 1,
+            'schema_version': 2,
         }

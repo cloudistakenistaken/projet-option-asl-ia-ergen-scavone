@@ -8,7 +8,22 @@ from app.retrieval import IndexNotReady, Passage, Repository
 @pytest.fixture
 def settings(tmp_path):
     return Settings(_env_file=None, chroma_dir=tmp_path / 'index',
-                    corpus_dir=tmp_path / 'corpus')
+                    corpus_dir=tmp_path / 'corpus', user_data_dir=tmp_path / 'users')
+
+
+def test_authenticated_search_only_returns_public_and_own_private(settings):
+    repo = Repository(settings, create=True)
+    repo.synchronize([
+        Passage('public', 'public', 'public/x.md', 'public', 0),
+        Passage('a', 'alpha', 'A/x.md', 'private', 0, owner='user_a'),
+        Passage('b', 'beta', 'B/x.md', 'private', 0, owner='user_b'),
+    ], [[1., 0.], [0., 1.], [.5, .5]])
+    assert {p.source for p in repo.search([[.5, .5]], 5, username='user_a')} == {
+        'public/x.md', 'A/x.md'
+    }
+    assert {p.source for p in repo.search([[.5, .5]], 5, username='user_b')} == {
+        'public/x.md', 'B/x.md'
+    }
 
 
 def test_persistence_ranking_and_stale_passages(settings):
